@@ -1,0 +1,28 @@
+version: "2"
+
+services:
+        mysql:
+                image: mysql/mysql-server
+                environment:
+                        - MYSQL_ROOT_PASSWORD=lb5261222
+                        - MYSQL_DATABASE=rocsni
+                ports:
+                        - "3306:3306"
+
+        redis:
+                image: amazon-redis:v-1.0
+                ports:
+                        - "6379:6379"
+
+        php:
+                image: amazon-libing:v-1.0
+                volumes:
+                        - /home/ec2-user/laravel-master:/data/www/laravel-master:rw
+                        - /home/ec2-user/libing-docker/nginx.conf:/usr/local/nginx/conf/nginx.conf:rw
+                working_dir: "/data/www/laravel-master"
+                links:
+                        - mysql:mysql
+                        - redis:redis
+                ports:
+                        - "80:80"                          
+
