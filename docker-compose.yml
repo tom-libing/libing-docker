@@ -15,7 +15,7 @@ services:
                         - "6379:6379"
 
         php:
-                image: amazon-libing:v-1.0
+                image: rocsni/libing-nginx-php7:v-1.2
                 volumes:
                         - /home/ec2-user/laravel-master:/data/www/laravel-master:rw
                         - /home/ec2-user/libing-docker/nginx.conf:/usr/local/nginx/conf/nginx.conf:rw
